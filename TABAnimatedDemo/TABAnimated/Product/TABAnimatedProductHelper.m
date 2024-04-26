@@ -192,6 +192,17 @@ static const CGFloat kTagLabelMinWidth = 15.f;
         production.backgroundLayer.frame = CGRectMake(production.backgroundLayer.frame.origin.x, production.backgroundLayer.frame.origin.y, view.frame.size.width, view.frame.size.height);
     }
     
+    if ([view isKindOfClass:[TABAnimatedPullLoadingComponent class]]) {
+        TABAnimatedPullLoadingComponent *pullLoading = (TABAnimatedPullLoadingComponent *)view;
+        UIEdgeInsets inset = pullLoading.modifyInset;
+        if (inset.top > 0 || inset.left > 0) {
+            production.backgroundLayer.frame = CGRectMake(inset.left, inset.top, production.backgroundLayer.frame.size.width, production.backgroundLayer.frame.size.height);
+            production.backgroundLayer.cornerRadius = 8;
+            production.backgroundLayer.cornerCurve = kCACornerCurveContinuous;
+            production.backgroundLayer.masksToBounds = true;
+        }
+    }
+    
     view.hidden = NO;
     view.layer.cornerRadius = production.backgroundLayer.cornerRadius;
     [view.layer addSublayer:production.backgroundLayer];

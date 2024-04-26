@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 设置刷新的class、高度、回调
 - (void)tab_addPullLoadingClass:(nonnull Class)pullLoadingClass viewHeight:(CGFloat)viewHeight actionHandler:(void (^)(void))actionHandler;
+- (void)tab_addPullLoadingClass:(nonnull Class)pullLoadingClass viewHeight:(CGFloat)viewHeight insets:(UIEdgeInsets)insets actionHandler:(void (^)(void))actionHandler;
 // 设置刷新的class、高度、事件
 - (void)tab_addPullLoadingClass:(nonnull Class)pullLoadingClass viewHeight:(CGFloat)viewHeight target:(id)target selector:(SEL)selector;
 

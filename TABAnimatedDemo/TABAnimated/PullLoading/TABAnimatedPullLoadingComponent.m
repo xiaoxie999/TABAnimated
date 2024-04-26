@@ -39,6 +39,14 @@ NSString *const TABAnimatedPullLoadingKeyPathPanState = @"state";
     return self;
 }
 
+- (instancetype)initWithScrollView:(UIScrollView *)scrollView targetClass:(Class)targetClass viewHeight:(CGFloat)viewHeight modifyInset:(UIEdgeInsets)insets actionHandler:(TABAnimatedFooterActionHandler)actionHandler {
+    if (self = [self initWithScrollView:scrollView targetClass:targetClass viewHeight:viewHeight]) {
+        self.actionHandler = actionHandler;
+        self.modifyInset = insets;
+    }
+    return self;
+}
+
 - (instancetype)initWithScrollView:(UIScrollView *)scrollView targetClass:(Class)targetClass viewHeight:(CGFloat)viewHeight target:(id)target action:(SEL)action {
     if (self = [self initWithScrollView:scrollView targetClass:targetClass viewHeight:viewHeight]) {
         self.action = action;
@@ -243,5 +251,12 @@ NSString *const TABAnimatedPullLoadingKeyPathPanState = @"state";
             break;
     }
 }
+
+/*
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    //self.layer.frame = CGRectMake(10, 0, self.layer.frame.size.width, self.layer.frame.size.height);
+}
+ */
 
 @end

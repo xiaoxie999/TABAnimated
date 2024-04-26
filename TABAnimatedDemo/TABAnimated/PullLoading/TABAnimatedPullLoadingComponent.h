@@ -28,6 +28,7 @@ typedef void(^TABAnimatedFooterActionHandler)(void);
 @property (nonatomic, assign) TABAnimatedPullLoadingState state;
 // 最开始的contentInset
 @property (nonatomic, assign, readonly) UIEdgeInsets scrollViewOriginalInset;
+@property (nonatomic, assign) UIEdgeInsets modifyInset;
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, copy) TABAnimatedFooterActionHandler actionHandler;
 
@@ -41,6 +42,7 @@ typedef void(^TABAnimatedFooterActionHandler)(void);
 - (void)removeObservers;
 
 - (instancetype)initWithScrollView:(UIScrollView *)scrollView targetClass:(Class)targetClass viewHeight:(CGFloat)viewHeight actionHandler:(TABAnimatedFooterActionHandler)actionHandler;
+- (instancetype)initWithScrollView:(UIScrollView *)scrollView targetClass:(Class)targetClass viewHeight:(CGFloat)viewHeight modifyInset:(UIEdgeInsets)insets actionHandler:(TABAnimatedFooterActionHandler)actionHandler;
 - (instancetype)initWithScrollView:(UIScrollView *)scrollView targetClass:(Class)targetClass viewHeight:(CGFloat)viewHeight target:(id)target action:(SEL)action;
 
 @end

@@ -34,6 +34,18 @@
     }
 }
 
+- (void)tab_addPullLoadingClass:(nonnull Class)pullLoadingClass viewHeight:(CGFloat)viewHeight insets:(UIEdgeInsets)insets actionHandler:(void (^)(void))actionHandler {
+    TABFormAnimated *tabAnimated = (TABFormAnimated *)self.tabAnimated;
+    if (tabAnimated.pullLoadingComponent == nil) {
+        tabAnimated.pullLoadingComponent = [[TABAnimatedPullLoadingComponent alloc] initWithScrollView:self
+                                                                                           targetClass:pullLoadingClass
+                                                                                            viewHeight:viewHeight
+                                                                                            modifyInset:insets
+                                                                                         actionHandler:actionHandler];
+        [self insertSubview:tabAnimated.pullLoadingComponent atIndex:0];
+    }
+}
+
 - (void)tab_addPullLoadinTarget:(id)target selector:(SEL)selector {
     Class targetClass = [self tab_getClass];
     CGFloat viewHeight = [self tab_getViewHeight];
