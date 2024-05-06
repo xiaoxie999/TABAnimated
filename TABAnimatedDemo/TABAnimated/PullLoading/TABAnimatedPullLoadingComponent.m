@@ -27,6 +27,7 @@ NSString *const TABAnimatedPullLoadingKeyPathPanState = @"state";
 
 @property (assign, nonatomic) NSInteger lastRefreshCount;
 @property (assign, nonatomic) CGFloat lastBottomDelta;
+@property (assign, nonatomic) BOOL added;
 
 @end
 
@@ -62,6 +63,7 @@ NSString *const TABAnimatedPullLoadingKeyPathPanState = @"state";
         self.viewHeight = viewHeight;
         self.tab_h = viewHeight;
         self.state = TABAnimatedPullLoadingStateNormal;
+        self.added = NO;
     }
     return self;
 }
@@ -115,11 +117,15 @@ NSString *const TABAnimatedPullLoadingKeyPathPanState = @"state";
     NSKeyValueObservingOptions options = NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld;
     [self.scrollView addObserver:self forKeyPath:TABAnimatedPullLoadingKeyPathContentOffset options:options context:nil];
     [self.scrollView addObserver:self forKeyPath:TABAnimatedPullLoadingKeyPathContentSize options:options context:nil];
+    self.added = YES;
 }
 
 - (void)removeObservers {
-    [self.scrollView removeObserver:self forKeyPath:TABAnimatedPullLoadingKeyPathContentOffset];
-    [self.scrollView removeObserver:self forKeyPath:TABAnimatedPullLoadingKeyPathContentSize];
+    if (self.added) {
+        [self.scrollView removeObserver:self forKeyPath:TABAnimatedPullLoadingKeyPathContentOffset];
+        [self.scrollView removeObserver:self forKeyPath:TABAnimatedPullLoadingKeyPathContentSize];
+        self.added = NO;
+    }
 }
 
 #pragma mark -
